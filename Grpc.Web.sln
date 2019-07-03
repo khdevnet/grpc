@@ -10,6 +10,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Protos\greet.proto = Protos\greet.proto
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grpc.Protos", "Grpc.Protos\Grpc.Protos.csproj", "{85FF544C-CDB3-48D9-A061-83AEEB21C7B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grpc.Truck", "Grpc.Truck\Grpc.Truck.csproj", "{A2DCAE8F-8E1E-44AC-95C8-B1C181171DBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +24,14 @@ Global
 		{D051BCC0-EC05-4410-9AFE-BD49D8074881}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D051BCC0-EC05-4410-9AFE-BD49D8074881}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D051BCC0-EC05-4410-9AFE-BD49D8074881}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85FF544C-CDB3-48D9-A061-83AEEB21C7B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85FF544C-CDB3-48D9-A061-83AEEB21C7B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85FF544C-CDB3-48D9-A061-83AEEB21C7B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85FF544C-CDB3-48D9-A061-83AEEB21C7B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2DCAE8F-8E1E-44AC-95C8-B1C181171DBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2DCAE8F-8E1E-44AC-95C8-B1C181171DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2DCAE8F-8E1E-44AC-95C8-B1C181171DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2DCAE8F-8E1E-44AC-95C8-B1C181171DBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

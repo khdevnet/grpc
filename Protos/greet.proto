@@ -1,13 +1,14 @@
 syntax = "proto3";
 
-option csharp_namespace = "WebApplication1";
-
 package Greet;
 
 // The greeting service definition.
 service Greeter {
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply) {}
+
+  rpc ListFeatures(stream HelloRequest) returns (HelloReply) {}
+
 }
 
 // The request message containing the user's name.
