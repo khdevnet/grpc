@@ -1,3 +1,4 @@
+using Grpc.Web.Hubs.SignalRWebPack.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +24,7 @@ namespace Grpc.Web
         {
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddGrpc();
+            services.AddSignalR();
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -50,12 +52,12 @@ namespace Grpc.Web
                 // Communication with gRPC endpoints must be made through a gRPC client.
                 // To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909
                 endpoints.MapGrpcService<GreeterService>();
+                endpoints.MapHub<ChatHub>("/hub");
             });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
 
             app.UseMvc();
 

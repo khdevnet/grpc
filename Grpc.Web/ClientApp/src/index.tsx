@@ -8,6 +8,7 @@ import { createBrowserHistory } from 'history';
 import configureStore from './store/configureStore';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import * as signalR from "@aspnet/signalr";
 
 // Create browser history to use in the Redux store
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href') as string;
@@ -25,3 +26,17 @@ ReactDOM.render(
     document.getElementById('root'));
 
 registerServiceWorker();
+
+const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/hub")
+    .build();
+
+connection.start().catch(err => console.log(err));
+
+connection.on("messageReceived", (message: string) => {
+    console.log(message);
+});
+setTimeout(() => {
+    connection.send("newMessage", "rrrrrr")
+        .then(() => console.log("===="));
+},2000);
