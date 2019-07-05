@@ -22,7 +22,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\store\configureSignalrSockets.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Grpc.Protos\Grpc.Protos.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\store\configureSignalrSockets.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -7,6 +7,7 @@
     "@types/google-protobuf": "^3.7.1",
     "bootstrap": "4.2.1",
     "connected-react-router": "6.2.1",
+    "es6-promise": "^4.2.8",
     "google-protobuf": "^3.9.0-rc.1",
     "grpc-web": "^1.0.4",
     "history": "4.7.1",

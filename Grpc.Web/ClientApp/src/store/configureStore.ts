@@ -1,8 +1,10 @@
-import { applyMiddleware, combineReducers, compose, createStore, Reducer } from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore, Reducer, AnyAction } from 'redux';
+import { Dispatch } from 'redux';
 import thunk from 'redux-thunk';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { History } from 'history';
 import { ApplicationState, reducers } from './';
+import { configureSignalrSockets, SignalRPromise } from './configureSignalrSockets';
 
 export default function configureStore(history: History, initialState?: ApplicationState) {
     const middleware = [
@@ -15,15 +17,25 @@ export default function configureStore(history: History, initialState?: Applicat
         router: connectRouter(history)
     });
 
-    const enhancers = [];
+    const enhancers: any[] = [];
     const windowIfDefined = typeof window === 'undefined' ? null : window as any;
     if (windowIfDefined && windowIfDefined.__REDUX_DEVTOOLS_EXTENSION__) {
         enhancers.push(windowIfDefined.__REDUX_DEVTOOLS_EXTENSION__());
     }
 
-    return createStore(
+    //return createStore(
+    //    rootReducer,
+    //    initialState,
+    //    compose(applyMiddleware(...middleware), ...enhancers),
+    //);
+
+    const store = createStore(
         rootReducer,
         initialState,
-        compose(applyMiddleware(...middleware), ...enhancers)
+        compose(applyMiddleware(...middleware), ...enhancers),
     );
+    configureSignalrSockets().then((obj: SignalRPromise) => {
+        obj.receive(store.dispatch);
+    });
+    return store;
 }
