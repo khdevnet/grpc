@@ -1,18 +1,17 @@
 import Point from './Point';
+import CanvasObject from './CanvasObject';
 
-export class Character {
+export class Character extends CanvasObject {
   constructor(
-    public x: number = 0,
-    public y: number = 0,
-    public width: number = 20,
-    public height: number = 42,
     public spriteX: number = 0,
     public spriteY: number = 0,
     public speed: number = 150,
     public edgeRegion: number = 50,
-    public moving: boolean = false,
-    public isReady: boolean = false,
-    public background: HTMLImageElement | null = null) { }
+    public moving: boolean = false) {
+    super();
+    this.width = 20;
+    this.height = 42;
+  }
 }
 
 export const setBackground = (char: Character, img: HTMLImageElement) => {

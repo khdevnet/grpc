@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Character } from '../models/Character';
-import MapObject from '../models/MapObject';
+import { MapObject } from '../models/MapObject';
 
 export interface IMapState {
     character: Character;
@@ -12,6 +12,28 @@ type MapProps = IMapState;
 
 class Map extends React.Component<MapProps> {
     private canvas = React.createRef<HTMLCanvasElement>();
+
+    getMousePos = (canvas: HTMLCanvasElement | null, evt: any) => {
+        if (canvas) {
+            var rect = canvas.getBoundingClientRect();
+            return {
+                x: evt.clientX - rect.left,
+                y: evt.clientY - rect.top
+            };
+        }
+    }
+
+    componentDidMount() {
+        if (this.canvas && this.canvas.current) {
+            var self = this;
+            this.canvas.current.addEventListener("click", function (evt) {
+                var mousePos = self.getMousePos(self.canvas.current, evt);
+                if (mousePos) {
+                    alert(mousePos.x + ',' + mousePos.y);
+                }
+            }, false);
+        }
+    }
 
     componentDidUpdate() {
         var props = this.props;
