@@ -10,11 +10,11 @@ import {
   isMoveLeft,
   isMoveDown,
   isMoveUp
-} from '../models/Character';
+} from './models/Character';
 
-import ImageLoader from '../models/ImageLoader';
-import Point from '../models/Point';
-import { MapObject, setBackground as setMapBackground} from '../models/MapObject';
+import ImageLoader from './models/ImageLoader';
+import Point from './models/Point';
+import { MapObject, setBackground as setMapBackground} from './models/MapObject';
 
 
 export interface IMapRendererState {

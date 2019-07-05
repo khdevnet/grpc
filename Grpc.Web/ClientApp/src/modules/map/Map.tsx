@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { Character } from '../models/Character';
-import { MapObject } from '../models/MapObject';
+import { Character } from './models/Character';
+import { MapObject } from './models/MapObject';
 
 export interface IMapState {
     character: Character;
