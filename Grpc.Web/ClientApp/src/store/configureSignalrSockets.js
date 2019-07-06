@@ -8,9 +8,9 @@ exports.configureSignalrSockets = function () {
             .withUrl("/hub")
             .build();
         var receive = function (onMessageCb) {
-            connection.on("messageReceived", function (message) {
-                console.log(message);
-                onMessageCb({ type: 'RECEIVE_POINT', point: message });
+            connection.on("messageReceived", function (vehicleGps) {
+                console.log(vehicleGps);
+                onMessageCb({ type: 'RECEIVE_VEHICLE_GPS', vehicleGps: vehicleGps });
             });
         };
         connection.start().then(function () { return resolve({ receive: receive }); }).catch(function (err) { return console.log(err); });

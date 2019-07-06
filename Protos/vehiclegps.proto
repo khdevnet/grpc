@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package VehicleGps;
+
+// The greeting service definition.
+service VehicleGpsListener {
+  // Sends a greeting
+  rpc StreamGps(stream VehicleGpsRequest) returns (VehicleGpsReply) {}
+
+}
+
+// The request message containing the user's name.
+message VehicleGpsRequest {
+  string  direction = 1;
+  int32  x = 2;
+  int32  y = 3;
+}
+
+// The response message containing the greetings.
+message VehicleGpsReply {
+  string message = 1;
+}

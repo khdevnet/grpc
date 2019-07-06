@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Greet;
 using Grpc.Core;
 using Grpc.Web.Hubs.SignalRWebPack.Hubs;
+using Grpc.Common.Models;
 using Microsoft.AspNetCore.SignalR;
+using VehicleGps;
+using Grpc.Web.Models;
 
 namespace Grpc.Web
 {
-    public class GreeterService : Greeter.GreeterBase
+    public class GreeterService : VehicleGpsListener.VehicleGpsListenerBase
     {
         private readonly IHubContext<ChatHub, IChatHub> hubContext;
 
@@ -18,24 +20,29 @@ namespace Grpc.Web
             this.hubContext = hubContext;
         }
 
-        public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
-        {
-            return Task.FromResult(new HelloReply
-            {
-                Message = "Hello " + request.Name
-            });
-        }
-
-        public override async Task<HelloReply> ListFeatures(IAsyncStreamReader<HelloRequest> requestStream, ServerCallContext context)
+        public override async Task<VehicleGpsReply> StreamGps(IAsyncStreamReader<VehicleGpsRequest> requestStream, ServerCallContext context)
         {
             while (await requestStream.MoveNext())
             {
-                await hubContext.Clients.All.MessageReceived(requestStream.Current.Name);
+                await hubContext.Clients.All.MessageReceived(ToModel(requestStream.Current));
             }
 
-            return new HelloReply
+            return new VehicleGpsReply
             {
                 Message = "Delivery Done"
+            };
+        }
+
+        private static VehicleeGpsModel ToModel(VehicleGpsRequest request)
+        {
+            return new VehicleeGpsModel()
+            {
+                Direction = request.Direction,
+                Gps = new PointModel
+                {
+                    X = request.X,
+                    Y = request.Y
+                }
             };
         }
     }

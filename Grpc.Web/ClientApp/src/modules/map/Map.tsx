@@ -1,17 +1,23 @@
 import * as React from 'react';
+import ImageLoader from './models/ImageLoader';
 
 import { Character } from './models/Character';
-import { MapObject } from './models/MapObject';
+import { MapObject, setBackground as setMapBackground } from './models/MapObject';
 
-export interface IMapState {
+
+export interface MapProps {
     character: Character;
-    mapObj: MapObject;
+    onLoad: () => void;
 }
-
-type MapProps = IMapState;
 
 class Map extends React.Component<MapProps> {
     private canvas = React.createRef<HTMLCanvasElement>();
+    private mapTerrain: MapObject;
+
+    constructor(props: MapProps) {
+        super(props);
+        this.mapTerrain = new MapObject();
+    }
 
     getMousePos = (canvas: HTMLCanvasElement | null, evt: any) => {
         if (canvas) {
@@ -24,6 +30,13 @@ class Map extends React.Component<MapProps> {
     }
 
     componentDidMount() {
+        var props = this.props;
+        new ImageLoader('https://raw.githubusercontent.com/khdevnet/grpc/master/docs/star-wars-galaxy-crop.png')
+            .onLoad((img) => {
+                setMapBackground(this.mapTerrain, img);
+                props.onLoad();
+            });
+
         if (this.canvas && this.canvas.current) {
             var self = this;
             this.canvas.current.addEventListener("click", function (evt) {
@@ -37,18 +50,19 @@ class Map extends React.Component<MapProps> {
 
     componentDidUpdate() {
         var props = this.props;
-        var map = props.mapObj;
         var char = props.character;
-        if (this.canvas && this.canvas.current) {
-            this.context = this.canvas.current.getContext('2d');
-            this.canvas.current.width = map.width;
-            this.canvas.current.height = map.height;
+
+        if (!(this.canvas && this.canvas.current)) {
+            return
         }
 
-        this.context.clearRect(0, 0, map.width, map.height);
+        this.context = this.canvas.current.getContext('2d');
+        this.context.clearRect(0, 0, this.mapTerrain.width, this.mapTerrain.height);
 
-        if (map.isReady) {
-            this.context.drawImage(map.background, map.x, map.y);
+        if (this.mapTerrain.isReady) {
+            this.canvas.current.width = this.mapTerrain.width;
+            this.canvas.current.height = this.mapTerrain.height;
+            this.context.drawImage(this.mapTerrain.background, this.mapTerrain.x, this.mapTerrain.y);
         }
 
         if (char.isReady) {

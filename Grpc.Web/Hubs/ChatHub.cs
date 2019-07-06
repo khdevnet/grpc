@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Grpc.Common.Models;
+using Grpc.Web.Models;
+using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
 namespace Grpc.Web.Hubs
@@ -12,7 +11,7 @@ namespace Grpc.Web.Hubs
         {
             public async Task NewMessage(string message)
             {
-                await Clients.All.MessageReceived(message);
+                await Clients.All.MessageReceived(new VehicleeGpsModel());
             }
         }
     }

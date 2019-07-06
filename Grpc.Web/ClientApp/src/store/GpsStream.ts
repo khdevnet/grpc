@@ -1,4 +1,5 @@
 import { Action, Reducer } from 'redux';
+import VehicleGps from '../modules/map/models/VehicleGps';
 import Point from '../modules/map/models/Point';
 import { strict } from 'assert';
 //import * as grpcWeb from 'grpc-web';
@@ -9,7 +10,7 @@ import { strict } from 'assert';
 // STATE - This defines the type of data maintained in the Redux store.
 
 export interface GpsStream {
-    point: string;
+    vehicleGps: VehicleGps;
 }
 
 // -----------------
@@ -17,7 +18,7 @@ export interface GpsStream {
 // They do not themselves have any side-effects; they just describe something that is going to happen.
 // Use @typeName and isActionType for type detection that works even after serialization/deserialization.
 
-export interface ReceivePointAction { type: 'RECEIVE_POINT', point: string }
+export interface ReceivePointAction { type: 'RECEIVE_VEHICLE_GPS', vehicleGps: VehicleGps }
 
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
@@ -28,7 +29,7 @@ export type KnownAction = ReceivePointAction;
 // They don't directly mutate state, but they can have external side-effects (such as loading data).
 
 export const actionCreators = {
-    receivePoint: () => <ReceivePointAction>{ type: 'RECEIVE_POINT' },
+    receivePoint: () => <ReceivePointAction>{ type: 'RECEIVE_VEHICLE_GPS' },
 };
 
 // ----------------
@@ -36,13 +37,13 @@ export const actionCreators = {
 
 export const reducer: Reducer<GpsStream> = (state: GpsStream | undefined, incomingAction: Action): GpsStream => {
     if (state === undefined) {
-        return { point: '' };
+        return { vehicleGps: new VehicleGps("", new Point(0, 0)) };
     }
 
     const action = incomingAction as KnownAction;
     switch (action.type) {
-        case 'RECEIVE_POINT': {
-            return { point: action.point };
+        case 'RECEIVE_VEHICLE_GPS': {
+            return { vehicleGps: action.vehicleGps };
         }
         default:
             return state;

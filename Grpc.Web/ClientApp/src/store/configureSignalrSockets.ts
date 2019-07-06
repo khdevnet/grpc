@@ -1,6 +1,7 @@
 ﻿import * as signalR from "@aspnet/signalr";
 import { Promise } from "es6-promise";
 import { Dispatch, AnyAction } from 'redux';
+import VehicleGps from '../modules/map/models/VehicleGps';
 
 export type SignalRPromise = {
     receive: (onMessageCb: any) => void;
@@ -13,9 +14,9 @@ export const configureSignalrSockets = () =>
             .build();
 
         const receive = (onMessageCb: any) => {
-            connection.on("messageReceived", (message: string) => {
-                console.log(message);
-                onMessageCb({ type: 'RECEIVE_POINT', point: message });
+            connection.on("messageReceived", (vehicleGps: VehicleGps) => {
+                console.log(vehicleGps);
+                onMessageCb({ type: 'RECEIVE_VEHICLE_GPS', vehicleGps: vehicleGps });
             });
         };
 

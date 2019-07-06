@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.Linq;
 
 namespace Grpc.Web
 {
@@ -22,7 +25,18 @@ namespace Grpc.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(options => options.EnableEndpointRouting = false);
+            JsonConvert.DefaultSettings = (() =>
+            {
+                var settings = new JsonSerializerSettings();
+                settings.Converters.Add(new StringEnumConverter { AllowIntegerValues = false });
+                return settings;
+            });
+
+            services.AddMvc(options =>
+            {
+                options.EnableEndpointRouting = false;
+            });
+
             services.AddGrpc();
             services.AddSignalR();
             // In production, the React files will be served from this directory
