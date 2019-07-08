@@ -1,5 +1,4 @@
-﻿using Grpc.Common.Models;
-using Grpc.Web.Models;
+﻿using Grpc.Web.Models;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 

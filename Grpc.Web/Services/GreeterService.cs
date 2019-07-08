@@ -4,18 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Grpc.Web.Hubs.SignalRWebPack.Hubs;
-using Grpc.Common.Models;
 using Microsoft.AspNetCore.SignalR;
 using VehicleGps;
 using Grpc.Web.Models;
 
 namespace Grpc.Web
 {
-    public class GreeterService : VehicleGpsListener.VehicleGpsListenerBase
+    public class VehicleGpsService : VehicleGpsListener.VehicleGpsListenerBase
     {
         private readonly IHubContext<ChatHub, IChatHub> hubContext;
 
-        public GreeterService(IHubContext<ChatHub, IChatHub> hubContext)
+        public VehicleGpsService(IHubContext<ChatHub, IChatHub> hubContext)
         {
             this.hubContext = hubContext;
         }

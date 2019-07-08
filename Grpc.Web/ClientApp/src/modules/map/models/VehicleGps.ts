@@ -1,5 +1,6 @@
 import Point from './Point';
+import { Direction } from './Direction';
 
 export default class VehicleGps {
-    constructor(public direction: string, public gps: Point) { }
+    constructor(public direction: Direction, public gps: Point) { }
 }

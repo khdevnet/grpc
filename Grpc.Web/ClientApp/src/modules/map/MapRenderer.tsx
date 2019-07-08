@@ -10,7 +10,8 @@ import {
     isMoveRight,
     isMoveLeft,
     isMoveDown,
-    isMoveUp
+    isMoveUp,
+    setView
 } from './models/Character';
 
 import ImageLoader from './models/ImageLoader';
@@ -43,8 +44,6 @@ class MapRenderer extends React.Component<MapRendererProps> {
                 this.characterBackground = img;
             });
 
-        setPosition(character, this.start);
-        this.setState({ character: { ...this.state.character } });
         requestAnimationFrame(this.tick);
     }
 
@@ -59,10 +58,10 @@ class MapRenderer extends React.Component<MapRendererProps> {
     render() {
         var vehicleGps = this.props.vehicleGps;
         var character = new Character();
-        character.background = this.characterBackground ? this.characterBackground : null;
-        character.isReady = !!this.characterBackground;
-        character.x = vehicleGps.gps.x;
-        character.y = vehicleGps.gps.y;
+        setBackground(character, this.characterBackground);
+        setPosition(character, vehicleGps.gps);
+        setView(character, vehicleGps.direction);
+
         return (<Map character={character} onLoad={this.onMapTerrainLoad} />);
     }
 }

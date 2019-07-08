@@ -1,17 +1,19 @@
-﻿using System;
+﻿using Grpc.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using VehicleGps;
 
 namespace Grpc.Truck
 {
     public class VehicleMapObject : MapObject
     {
-        private readonly StartMapObject start;
-        private readonly DestinationMapObject destination;
+        private readonly MapObject start;
+        private readonly MapObject destination;
         private readonly int step;
 
-        public VehicleMapObject(StartMapObject start, DestinationMapObject destination, int step) : base(start.X, start.Y)
+        public VehicleMapObject(MapObject start, MapObject destination, int step) : base(start.X, start.Y)
         {
             this.start = start;
             this.destination = destination;
@@ -20,7 +22,7 @@ namespace Grpc.Truck
 
         public bool isArrived()
         {
-            return start.X == destination.X && start.Y == destination.Y;
+            return X == destination.X && Y == destination.Y;
         }
 
         public VehicleGpsRequest Move()
@@ -44,11 +46,12 @@ namespace Grpc.Truck
             {
                 Y += step;
             }
+
             return new VehicleGpsRequest
             {
                 X = X,
                 Y = Y,
-                Direction = ""
+                Direction = GetDirection()
             };
         }
 
@@ -70,6 +73,51 @@ namespace Grpc.Truck
         public bool IsMoveLeft(int endX)
         {
             return X > endX;
+        }
+
+        private string GetDirection()
+        {
+            if (IsMoveLeft(destination.X) && IsMoveUp(destination.Y))
+            {
+                return Direction.Northwest.ToString();
+            }
+
+            if (IsMoveRight(destination.X) && IsMoveUp(destination.Y))
+            {
+                return Direction.Northeast.ToString();
+            }
+
+            if (IsMoveRight(destination.X) && IsMoveDown(destination.Y))
+            {
+                return Direction.Northeast.ToString();
+            }
+
+            if (IsMoveLeft(destination.X) && IsMoveDown(destination.Y))
+            {
+                return Direction.Southwest.ToString();
+            }
+
+            if (IsMoveLeft(destination.X))
+            {
+                return Direction.West.ToString();
+            }
+
+            if (IsMoveUp(destination.Y))
+            {
+                return Direction.North.ToString();
+            }
+
+            if (IsMoveRight(destination.X))
+            {
+                return Direction.East.ToString();
+            }
+
+            if (IsMoveDown(destination.Y))
+            {
+                return Direction.South.ToString();
+            }
+
+            return Direction.South.ToString();
         }
     }
 }

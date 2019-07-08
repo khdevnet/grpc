@@ -2,6 +2,12 @@
 using Grpc.Core;
 using System;
 using System.Threading.Tasks;
+using Dijkstra.NET.Graph;
+using Dijkstra.NET.ShortestPath;
+using Grpc.Truck.Planets;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Grpc.Truck
 {
@@ -9,30 +15,37 @@ namespace Grpc.Truck
     {
         static async Task Main(string[] args)
         {
-            var start = new StartMapObject(100, 500);
-            var destination = new DestinationMapObject(300, 500);
-
-            var vehicle = new VehicleMapObject(start, destination, 1);
-
-
             AppContext.SetSwitch(
         "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport",
         true);
 
             Console.WriteLine("Press enter to start delivery.");
+            Console.ReadLine();
 
             Channel channel = new Channel("127.0.0.1:5000", ChannelCredentials.Insecure);
 
             var client = new VehicleGpsListener.VehicleGpsListenerClient(channel);
-            var points = new[] { new VehicleGpsRequest() { Direction = "west", X = 100, Y = 300 } };
 
-            Console.ReadLine();
+            var rb = new RouteBuilder();
+
+            var path = rb.GetPath(Planet.Dathomir, Planet.Dantooine);
 
             using (var call = client.StreamGps())
             {
-                while (!vehicle.isArrived())
+                MapObject current = path.Dequeue();
+                MapObject next;
+                while (path.Any())
                 {
-                    await call.RequestStream.WriteAsync(vehicle.Move());
+                    next = path.Dequeue();
+
+                    var vehicle = new VehicleMapObject(current, next, 1);
+                    while (!vehicle.isArrived())
+                    {
+                        await call.RequestStream.WriteAsync(vehicle.Move());
+                        await Task.Delay(500);
+                    }
+
+                    current = next;
                 }
 
                 await call.RequestStream.CompleteAsync();
