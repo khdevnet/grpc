@@ -26,17 +26,3 @@ ReactDOM.render(
     document.getElementById('root'));
 
 registerServiceWorker();
-
-//const connection = new signalR.HubConnectionBuilder()
-//    .withUrl("/hub")
-//    .build();
-
-//connection.start().catch(err => console.log(err));
-
-//connection.on("messageReceived", (message: string) => {
-//    console.log(message);
-//});
-//setTimeout(() => {
-//    connection.send("newMessage", "rrrrrr")
-//        .then(() => console.log("===="));
-//}, 2000);

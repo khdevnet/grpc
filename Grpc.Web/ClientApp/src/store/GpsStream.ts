@@ -2,6 +2,7 @@ import { Action, Reducer } from 'redux';
 import VehicleGps from '../modules/map/models/VehicleGps';
 import Point from '../modules/map/models/Point';
 import { strict } from 'assert';
+import { Direction } from '../modules/map/models/Direction';
 //import * as grpcWeb from 'grpc-web';
 //import { GreeterClient } from '../protos/greet_grpc_web_pb';
 //import { HelloRequest, HelloReply } from '../protos/greet_pb';
@@ -37,7 +38,7 @@ export const actionCreators = {
 
 export const reducer: Reducer<GpsStream> = (state: GpsStream | undefined, incomingAction: Action): GpsStream => {
     if (state === undefined) {
-        return { vehicleGps: new VehicleGps("", new Point(0, 0)) };
+        return { vehicleGps: new VehicleGps(Direction.East, new Point(0, 0)) };
     }
 
     const action = incomingAction as KnownAction;

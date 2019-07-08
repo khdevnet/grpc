@@ -10,7 +10,8 @@ import {
     isMoveRight,
     isMoveLeft,
     isMoveDown,
-    isMoveUp,
+    isMoveUp,
+
     setView
 } from './models/Character';
 
@@ -29,7 +30,7 @@ class MapRenderer extends React.Component<MapRendererProps> {
     start: Point;
     characterBackground: HTMLImageElement | null = null;
 
-    constructor(props: any) {
+    constructor(props: MapRendererProps) {
         super(props);
         this.state = { character: new Character() };
         this.tick = this.tick.bind(this);

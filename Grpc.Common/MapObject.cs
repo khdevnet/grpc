@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Grpc.Truck
+namespace Grpc.Common
 {
     public class MapObject
     {
