@@ -3,7 +3,6 @@ import * as GpsStream from './GpsStream';
 // The top-level state object
 export interface ApplicationState {
     gpsStream: GpsStream.GpsStream;
-    planets: mapReducer.PlanetsState;
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property using

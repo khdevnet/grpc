@@ -5,10 +5,7 @@ import * as GpsStreamStore from '../store/GpsStream';
 import ImageLoader from '../utils/ImageLoader';
 import Map from './Map';
 import {
-    Character,
-    setBackground,
-    setPosition,
-    setView
+    Character
 } from '../models/Character';
 
 interface HomeProps {
@@ -24,7 +21,7 @@ class Home extends React.Component<HomeProps> {
     }
 
     componentDidMount() {
-        new ImageLoader('http://v12.img-up.net/knightd25b8b7e.png')
+        new ImageLoader('https://raw.githubusercontent.com/khdevnet/grpc/master/docs/shutle.png')
             .onLoad((img) => {
                 this.vehicleBackground = img;
             });
@@ -42,10 +39,8 @@ class Home extends React.Component<HomeProps> {
 
     render() {
         var vehicleGps = this.props.gpsStream.vehicleGps;
-        var character = new Character();
-        setBackground(character, this.vehicleBackground);
-        setPosition(character, vehicleGps.gps);
-        setView(character, vehicleGps.direction);
+        var character = new Character(vehicleGps.gps.x, vehicleGps.gps.y, vehicleGps.direction, this.vehicleBackground);
+
         return (
             <div>
                 <h1>Map: {vehicleGps.direction} {vehicleGps.gps.x} : {vehicleGps.gps.y}</h1>
@@ -56,8 +51,7 @@ class Home extends React.Component<HomeProps> {
 
 function mapStateToProps(state: ApplicationState) {
     return {
-        gpsStream: state.gpsStream,
-        planets: state.planets
+        gpsStream: state.gpsStream
     };
 };
 
