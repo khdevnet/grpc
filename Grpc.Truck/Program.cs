@@ -24,7 +24,15 @@ namespace Grpc.Truck
             Console.WriteLine($"[ {string.Join(',', Planet.All.Keys)}]");
             Console.WriteLine("Enter route in format : {\"from\":\"Dantooine\",\"to\": \"Gorse\" }");
             var routeJson = Console.ReadLine();
-            var route = JsonConvert.DeserializeObject<RouteModel>(routeJson);
+            var route = new RouteModel()
+            {
+                From = "Dantooine",
+                To = "Gorse"
+            };
+            if (!string.IsNullOrEmpty(routeJson))
+            {
+                route = JsonConvert.DeserializeObject<RouteModel>(routeJson);
+            }
             Channel channel = new Channel("127.0.0.1:5000", ChannelCredentials.Insecure);
 
             var client = new VehicleGpsListener.VehicleGpsListenerClient(channel);
@@ -45,7 +53,7 @@ namespace Grpc.Truck
                     while (!vehicle.isArrived())
                     {
                         await call.RequestStream.WriteAsync(vehicle.Move());
-                        await Task.Delay(500);
+                        await Task.Delay(300);
                     }
 
                     current = next;

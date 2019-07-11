@@ -1,8 +1,8 @@
 import * as React from 'react';
-import ImageLoader from './utils/ImageLoader';
+import ImageLoader from '../utils/ImageLoader';
 
-import { Character } from './models/Character';
-import { MapObject, setBackground as setMapBackground } from './models/MapObject';
+import { Character } from '../models/Character';
+import { MapObject, setBackground as setMapBackground } from '../models/MapObject';
 
 
 export interface MapProps {

@@ -1,5 +1,4 @@
-import { applyMiddleware, combineReducers, compose, createStore, Reducer, AnyAction } from 'redux';
-import { Dispatch } from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { History } from 'history';
@@ -22,12 +21,6 @@ export default function configureStore(history: History, initialState?: Applicat
     if (windowIfDefined && windowIfDefined.__REDUX_DEVTOOLS_EXTENSION__) {
         enhancers.push(windowIfDefined.__REDUX_DEVTOOLS_EXTENSION__());
     }
-
-    //return createStore(
-    //    rootReducer,
-    //    initialState,
-    //    compose(applyMiddleware(...middleware), ...enhancers),
-    //);
 
     const store = createStore(
         rootReducer,

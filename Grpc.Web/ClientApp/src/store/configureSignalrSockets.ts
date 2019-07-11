@@ -1,7 +1,6 @@
 ﻿import * as signalR from "@aspnet/signalr";
 import { Promise } from "es6-promise";
-import { Dispatch, AnyAction } from 'redux';
-import VehicleGps from '../modules/map/models/VehicleGps';
+import VehicleGps from '../models/VehicleGps';
 
 export type SignalRPromise = {
     receive: (onMessageCb: any) => void;

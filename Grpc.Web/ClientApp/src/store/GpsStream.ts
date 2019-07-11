@@ -1,8 +1,7 @@
 import { Action, Reducer } from 'redux';
-import VehicleGps from '../modules/map/models/VehicleGps';
-import Point from '../modules/map/models/Point';
-import { strict } from 'assert';
-import { Direction } from '../modules/map/models/Direction';
+import VehicleGps from '../models/VehicleGps';
+import Point from '../models/Point';
+import { Direction } from '../models/Direction';
 
 export interface GpsStream {
     vehicleGps: VehicleGps;
