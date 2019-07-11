@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ImageLoader from './models/ImageLoader';
+import ImageLoader from './utils/ImageLoader';
 
 import { Character } from './models/Character';
 import { MapObject, setBackground as setMapBackground } from './models/MapObject';

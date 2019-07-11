@@ -15,7 +15,7 @@ import {
     setView
 } from './models/Character';
 
-import ImageLoader from './models/ImageLoader';
+import ImageLoader from './utils/ImageLoader';
 import Point from './models/Point';
 
 type MapRendererProps = GpsStreamStore.GpsStream;

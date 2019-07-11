@@ -1,8 +1,10 @@
 import * as GpsStream from './GpsStream';
+import * as mapReducer from '../modules/map/reducers/mapReducer';
 
 // The top-level state object
 export interface ApplicationState {
-    gpsStream: GpsStream.GpsStream | undefined;
+    gpsStream: GpsStream.GpsStream;
+    planets: mapReducer.PlanetsState;
 }
 
 // Whenever an action is dispatched, Redux will update each top-level application state property using
@@ -10,6 +12,7 @@ export interface ApplicationState {
 // acts on the corresponding ApplicationState property type.
 export const reducers = {
     gpsStream: GpsStream.reducer,
+    planets: mapReducer.reducer,
 };
 
 // This type can be used as a hint on action creators so that its 'dispatch' and 'getState' params are

@@ -13,8 +13,8 @@ namespace Grpc.Web.Controllers
     [Route("api/[controller]")]
     public class PlanetsController : Controller
     {
-        [HttpPost("[action]")]
-        public IEnumerable<string> Get()
+        [HttpGet("[action]")]
+        public IEnumerable<string> All()
         {
             return Planet.All.Values.Select(p => p.ToString());
         }
