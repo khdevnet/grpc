@@ -7,16 +7,14 @@ using VehicleGps;
 
 namespace Grpc.Truck
 {
-    public class VehicleMapObject : MapObject
+    public class VehicleSimulator : MapObject
     {
-        private readonly MapObject start;
         private readonly MapObject destination;
         private readonly int step;
 
-        public VehicleMapObject(MapObject start, MapObject destination, int step) : base(start.X, start.Y)
+        public VehicleSimulator(MapObject from, MapObject to, int step) : base(from.X, from.Y)
         {
-            this.start = start;
-            this.destination = destination;
+            this.destination = to;
             this.step = step;
         }
 
@@ -89,7 +87,7 @@ namespace Grpc.Truck
 
             if (IsMoveRight(destination.X) && IsMoveDown(destination.Y))
             {
-                return Direction.Northeast.ToString();
+                return Direction.Southeast.ToString();
             }
 
             if (IsMoveLeft(destination.X) && IsMoveDown(destination.Y))

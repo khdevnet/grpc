@@ -49,8 +49,7 @@ class Map extends React.Component<MapProps> {
     }
 
     componentDidUpdate() {
-        var props = this.props;
-        var char = props.character;
+        var char = this.props.character;
 
         if (!(this.canvas && this.canvas.current)) {
             return

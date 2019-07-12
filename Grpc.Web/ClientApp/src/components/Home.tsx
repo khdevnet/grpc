@@ -4,9 +4,8 @@ import { ApplicationState } from '../store';
 import * as GpsStreamStore from '../store/GpsStream';
 import ImageLoader from '../utils/ImageLoader';
 import Map from './Map';
-import {
-    Character
-} from '../models/Character';
+import { Character } from '../models/Character';
+import { Direction } from '../models/Direction';
 
 interface HomeProps {
     gpsStream: GpsStreamStore.GpsStream;
@@ -43,7 +42,7 @@ class Home extends React.Component<HomeProps> {
 
         return (
             <div>
-                <h1>Map: {vehicleGps.direction} {vehicleGps.gps.x} : {vehicleGps.gps.y}</h1>
+                <h1>Map: {Direction[vehicleGps.direction]} {vehicleGps.gps.x} : {vehicleGps.gps.y}</h1>
                 <Map character={character} onLoad={this.onMapTerrainLoad} />
             </div>);
     }

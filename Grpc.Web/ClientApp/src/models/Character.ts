@@ -11,38 +11,42 @@ export class Character extends CanvasObject {
         public direction: Direction = Direction.East,
         img: HTMLImageElement | null = null) {
         super(x, y, 20, 42);
+       
         this.background = img ? img : null;
         this.isReady = !!img;
         this.spriteX = 0;
         this.spriteY = 0;
         this.setView(direction);
-       
     }
 
     setView = (direction: Direction) => {
 
-        if (direction == Direction.Northwest) {
+        if (direction === Direction.Northwest) {
+            console.log("direction");
             console.log(direction);
             this.width = 27;
             this.height = 27;
             this.spriteX = 99;
             this.spriteY = 75;
         }
-        if (direction == Direction.Northeast) {
+        if (direction === Direction.Northeast) {
+            console.log("direction");
             console.log(direction);
             this.width = 27;
             this.height = 27;
             this.spriteX = 0;
             this.spriteY = 75;
         }
-        if (direction == Direction.Southeast) {
+        if (direction === Direction.Southeast) {
+            console.log("direction");
             console.log(direction);
             this.width = 27;
             this.height = 27;
             this.spriteX = 29;
             this.spriteY = 75;
         }
-        if (direction == Direction.Southwest) {
+        if (direction === Direction.Southwest) {
+            console.log("direction");
             console.log(direction);
             this.width = 27;
             this.height = 27;
@@ -50,7 +54,8 @@ export class Character extends CanvasObject {
             this.spriteY = 75;
         }
 
-        if (direction == Direction.West) {
+        if (direction === Direction.West) {
+            console.log("direction");
             console.log(direction);
             this.width = 37;
             this.height = 25;
@@ -58,7 +63,8 @@ export class Character extends CanvasObject {
             this.spriteY = 43;
         }
 
-        if (direction == Direction.North) {
+        if (direction === Direction.North) {
+            console.log("direction");
             console.log(direction);
             this.width = 27;
             this.height = 38;
@@ -66,7 +72,8 @@ export class Character extends CanvasObject {
             this.spriteY = 0;
         }
 
-        if (direction == Direction.East) {
+        if (direction === Direction.East) {
+            console.log("direction");
             console.log(direction);
             this.width = 39;
             this.height = 25;
@@ -74,13 +81,13 @@ export class Character extends CanvasObject {
             this.spriteY = 44;
         }
 
-        if (direction == Direction.South) {
+        if (direction === Direction.South) {
+            console.log("direction");
             console.log(direction);
             this.spriteY = 0;
             this.spriteX = 27;
             this.width = 27;
             this.height = 38;
-        }
-        console.log(this);
-    };
+        }        
+    }
 }
