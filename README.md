@@ -1,6 +1,12 @@
 # Space shuttle simulator on map 
 Designed and created for training purpose in asp.net core 3 gRPC.
 
+# TechStack
+* ASP.NET CORE 3
+* gRPC
+* Dajkstar algorithm
+* ReactJs (Typescript)
+
 # Start application
 1. Clone project
 2. Run Grpc.Web, Grpc.Truck
