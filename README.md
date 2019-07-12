@@ -1,4 +1,15 @@
-# grpc
+# Space shuttle simulator on map 
+Designed and created for training purpose in asp.net core 3 gRPC.
+
+# Start application
+1. Clone project
+2. Run Grpc.Web, Grpc.Truck
+
+# Architecture
+![](https://github.com/khdevnet/grpc/blob/master/docs/architecture.png)
+# User Interface
+![](https://github.com/khdevnet/grpc/blob/master/docs/2019-07-12_13-52-52.png)
+# gRPC
 In gRPC a client application can directly call methods on a server application on a different machine as if it was a local object, making it easier for you to create distributed applications and services. As in many RPC systems, gRPC is based around the idea of defining a service, specifying the methods that can be called remotely with their parameters and return types. On the server side, the server implements this interface and runs a gRPC server to handle client calls. On the client side, the client has a stub (referred to as just a client in some languages) that provides the same methods as the server.
 
 # Resources
