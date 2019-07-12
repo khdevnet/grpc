@@ -12,9 +12,9 @@ namespace Grpc.Web.Controllers
     [Route("api/[controller]")]
     public class TestGpsController : Controller
     {
-        private readonly IHubContext<ChatHub, IChatHub> hubContext;
+        private readonly IHubContext<GpsStreamHub, IGpsStreamHub> hubContext;
 
-        public TestGpsController(IHubContext<ChatHub, IChatHub> hubContext)
+        public TestGpsController(IHubContext<GpsStreamHub, IGpsStreamHub> hubContext)
         {
             this.hubContext = hubContext;
         }

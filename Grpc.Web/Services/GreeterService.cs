@@ -12,9 +12,9 @@ namespace Grpc.Web
 {
     public class VehicleGpsService : VehicleGpsListener.VehicleGpsListenerBase
     {
-        private readonly IHubContext<ChatHub, IChatHub> hubContext;
+        private readonly IHubContext<GpsStreamHub, IGpsStreamHub> hubContext;
 
-        public VehicleGpsService(IHubContext<ChatHub, IChatHub> hubContext)
+        public VehicleGpsService(IHubContext<GpsStreamHub, IGpsStreamHub> hubContext)
         {
             this.hubContext = hubContext;
         }

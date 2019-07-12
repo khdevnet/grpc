@@ -66,7 +66,7 @@ namespace Grpc.Web
                 // Communication with gRPC endpoints must be made through a gRPC client.
                 // To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909
                 endpoints.MapGrpcService<VehicleGpsService>();
-                endpoints.MapHub<ChatHub>("/hub");
+                endpoints.MapHub<GpsStreamHub>("/hub");
             });
 
             app.UseHttpsRedirection();

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Grpc.Web.Hubs.SignalRWebPack.Hubs
 {
-    public interface IChatHub
+    public interface IGpsStreamHub
     {
         Task MessageReceived(VehicleeGpsModel gps);
     }
