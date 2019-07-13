@@ -1,3 +1,4 @@
+using Grpc.Web.Data;
 using Grpc.Web.Hubs.SignalRWebPack.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,8 @@ namespace Grpc.Web
                 settings.Converters.Add(new StringEnumConverter { AllowIntegerValues = false });
                 return settings;
             });
+
+            services.AddSingleton<IRouteObserver, RouteObserver>();
 
             services.AddMvc(options =>
             {

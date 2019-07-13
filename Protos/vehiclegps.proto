@@ -5,8 +5,17 @@ package VehicleGps;
 // The greeting service definition.
 service VehicleGpsListener {
   // Sends a greeting
-  rpc StreamGps(stream VehicleGpsRequest) returns (VehicleGpsReply) {}
+  rpc StreamGps(stream VehicleGpsRequest) returns (Reply) {}
 
+  rpc ListenRoute(stream RouteRequest) returns (stream RouteResponse) {}
+}
+
+message RouteRequest {
+}
+
+message RouteResponse {
+  string  from = 1;
+  string  to = 2;
 }
 
 // The request message containing the user's name.
@@ -17,6 +26,6 @@ message VehicleGpsRequest {
 }
 
 // The response message containing the greetings.
-message VehicleGpsReply {
+message Reply {
   string message = 1;
 }

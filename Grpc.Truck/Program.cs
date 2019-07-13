@@ -19,43 +19,47 @@ namespace Grpc.Truck
             AppContext.SetSwitch(
         "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport",
         true);
-
-            Console.WriteLine("All planets:");
-            Console.WriteLine($"[{string.Join(',', Planet.All.Keys)}]");
-
+            await Task.Delay(15000);
+            Console.WriteLine("Grpc client connected to: 127.0.0.1:5000");
             Channel channel = new Channel("127.0.0.1:5000", ChannelCredentials.Insecure);
             var client = new VehicleGpsListener.VehicleGpsListenerClient(channel);
 
-            var input = "";
-
-            while (input != "exit")
+            using (var routeStream = client.ListenRoute())
             {
-                Console.WriteLine("Enter route in format : {\"from\":\"Dantooine\",\"to\": \"Gorse\" }");
-                Console.WriteLine("For exit type: exit");
-                input = Console.ReadLine();
-                var route = new RouteModel()
+                while (await routeStream.ResponseStream.MoveNext())
                 {
-                    From = "Dantooine",
-                    To = "Gorse"
-                };
-                if (!string.IsNullOrEmpty(input))
-                {
-                    route = JsonConvert.DeserializeObject<RouteModel>(input);
+                    Console.WriteLine("Wait for route:");
+                    var route = ToRouteModel(routeStream.ResponseStream.Current);
+                    if (!string.IsNullOrEmpty(route.From))
+                    {
+                        Console.WriteLine($"Route:{route.From} > {route.To}");
+                        await SimulateRoute(client, route);
+                    }
                 }
-                await SimulateRoute(client, route);
             }
-
 
             channel.ShutdownAsync().Wait();
 
             Console.ReadLine();
         }
 
+        private static RouteModel ToRouteModel(RouteResponse response)
+        {
+            return new RouteModel
+            {
+                From = response.From,
+                To = response.To
+            };
+        }
+
         private static async Task SimulateRoute(VehicleGpsListener.VehicleGpsListenerClient client, RouteModel route)
         {
             var path = new RouteBuilder().GetPath(Planet.All[route.From], Planet.All[route.To]);
 
-            using (var call = client.StreamGps())
+            Console.WriteLine("Path: ");
+            Console.WriteLine($"[{string.Join(',', path)}]");
+
+            using (AsyncClientStreamingCall<VehicleGpsRequest, Reply> call = client.StreamGps())
             {
                 MapObject current = path.Dequeue();
                 MapObject next;
