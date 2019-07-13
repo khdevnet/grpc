@@ -26,6 +26,7 @@ In gRPC a client application can directly call methods on a server application o
 
 # Resources
 * [Grpc](https://grpc.io/docs/guides/)
+* [aspnet-react-and-docker](https://hjerpbakk.com/blog/2018/06/25/aspnet-react-and-docker)
 * [Dajkstar algorithm](https://gist.github.com/jpillora/7382441)
 * [Canvas image movement](https://codepen.io/JTParrett/pen/vgwHA)
 * [redux-websocket-example](https://github.com/maxnachlinger/redux-websocket-example)
